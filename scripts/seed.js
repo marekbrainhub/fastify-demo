@@ -1,6 +1,5 @@
 import 'dotenv/config'
 import {drizzle} from 'drizzle-orm/libsql'
-import {eq} from 'drizzle-orm'
 import {usersTable} from '../db/schema'
 
 const db = drizzle(process.env.DB_FILE_NAME)
@@ -13,3 +12,5 @@ async function main() {
 
 	await db.insert(usersTable).values(users)
 }
+
+main()
