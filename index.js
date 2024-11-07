@@ -1,6 +1,5 @@
 import 'dotenv/config'
 import fastify from 'fastify'
-import cookie from '@fastify/cookie'
 import fp from 'fastify-plugin'
 import {drizzle} from 'drizzle-orm/libsql'
 import {createClient} from '@libsql/client'
@@ -10,9 +9,14 @@ import {authRoutes} from './routes/auth.js'
 
 const client = createClient({url: process.env.DB_FILE_NAME})
 const db = drizzle({client})
-const app = fastify({logger: true})
+const app = fastify({
+	logger: {
+		transport: {
+			target: 'pino-pretty',
+		},
+	},
+})
 
-app.register(cookie, {secret: 'supersecret'})
 app.register(fp((app, _options, done) => {
 	app.decorate('db', db)
 	done()
