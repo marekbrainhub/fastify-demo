@@ -130,3 +130,7 @@ dist
 .pnp.*
 
 fastify-demo.sqlite
+
+/.cache
+/build
+.env
