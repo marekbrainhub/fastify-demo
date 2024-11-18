@@ -9,7 +9,9 @@ import {ChakraProvider, defaultSystem} from '@chakra-ui/react'
 import {rootAuthLoader} from '@clerk/remix/ssr.server'
 import {NavbarPage} from './layouts/NavbarPage'
 import {ClerkApp as withClerk} from '@clerk/remix'
+import * as clerkLocalizations from '@clerk/localizations'
 import './i18n'
+import {useState} from 'react'
 
 export const links = () => [
 	{rel: 'preconnect', href: 'https://fonts.googleapis.com'},
@@ -47,11 +49,17 @@ export function Layout({children}) {
 }
 
 function App() {
-	return (
-		<NavbarPage>
+	const [lang, setLang] = useState()
+
+	const AppWithClerkProvider = withClerk(() => (
+		<NavbarPage setLang={setLang}>
 			<Outlet />
 		</NavbarPage>
+	), {localization: clerkLocalizations[lang]})
+
+	return (
+		<AppWithClerkProvider />
 	)
 }
 
-export default withClerk(App)
+export default App

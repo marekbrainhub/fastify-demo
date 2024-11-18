@@ -10,15 +10,16 @@ import {useTranslation} from 'react-i18next'
 
 const languages = createListCollection({
 	items: [
-		{label: 'English', value: 'en'},
-		{label: 'polski', value: 'pl'},
+		{label: 'English', value: 'enUS'},
+		{label: 'polski', value: 'plPL'},
 	],
 })
 
-export const LanguageSwitcher = () => {
+export const LanguageSwitcher = ({setLang}) => {
 	const {i18n} = useTranslation()
 
 	const handleSelect = ({value: [lang]}) => {
+		setLang(lang)
 		i18n.changeLanguage(lang)
 	}
 

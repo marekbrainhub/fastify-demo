@@ -8,24 +8,15 @@ import {
 import {
 	HStack, VStack, Button,
 } from '@chakra-ui/react'
-import {ChartPieIcon} from 'lucide-react'
 import {LanguageSwitcher} from '../shared/LanguageSwitcher'
 
-export const NavbarPage = ({children}) => (
+export const NavbarPage = ({setLang, children}) => (
 	<VStack w='100%'>
 		<HStack w='100%' p={2} bg='bg.subtle' justifyContent='flex-end'>
-			<LanguageSwitcher />
+			<LanguageSwitcher setLang={setLang} />
 			<SignedIn>
 				<div>
-					<UserButton>
-						<UserButton.MenuItems>
-							<UserButton.Action
-								label='Example Action'
-								labelIcon={<ChartPieIcon />}
-								onClick={() => console.info('Clicked icon.')}
-							/>
-						</UserButton.MenuItems>
-					</UserButton>
+					<UserButton />
 				</div>
 			</SignedIn>
 			<SignedOut>
