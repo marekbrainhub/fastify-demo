@@ -9,6 +9,7 @@ import {ChakraProvider, defaultSystem} from '@chakra-ui/react'
 import {rootAuthLoader} from '@clerk/remix/ssr.server'
 import {NavbarPage} from './layouts/NavbarPage'
 import {ClerkApp as withClerk} from '@clerk/remix'
+import './i18n'
 
 export const links = () => [
 	{rel: 'preconnect', href: 'https://fonts.googleapis.com'},
