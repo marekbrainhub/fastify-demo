@@ -4,11 +4,15 @@ import {initReactI18next} from 'react-i18next'
 const resources = {
 	enUS: {
 		translation: {
+			signIn: 'Sign In',
+			signUp: 'Sign Up',
 			indexRoute: 'Index Route',
 		},
 	},
 	plPL: {
 		translation: {
+			signIn: 'Logowanie',
+			signUp: 'Rejestracja',
 			indexRoute: 'Ścieżka indeksowa',
 		},
 	},

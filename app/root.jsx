@@ -4,11 +4,12 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useLoaderData,
 } from '@remix-run/react'
 import {ChakraProvider, defaultSystem} from '@chakra-ui/react'
 import {rootAuthLoader} from '@clerk/remix/ssr.server'
 import {NavbarPage} from './layouts/NavbarPage'
-import {ClerkApp as withClerk} from '@clerk/remix'
+import {ClerkProvider} from '@clerk/remix'
 import * as clerkLocalizations from '@clerk/localizations'
 import './i18n'
 import {useState} from 'react'
@@ -51,14 +52,19 @@ export function Layout({children}) {
 function App() {
 	const [lang, setLang] = useState()
 
-	const AppWithClerkProvider = withClerk(() => (
-		<NavbarPage setLang={setLang}>
-			<Outlet />
-		</NavbarPage>
-	), {localization: clerkLocalizations[lang]})
+	const data = useLoaderData()
+	const localization = clerkLocalizations[lang]
 
 	return (
-		<AppWithClerkProvider />
+		<ClerkProvider
+			clerkState={data.clerkState}
+			localization={localization}
+			appearance={{layout: {shimmer: false}}}
+		>
+			<NavbarPage setLang={setLang}>
+				<Outlet />
+			</NavbarPage>
+		</ClerkProvider>
 	)
 }
 
